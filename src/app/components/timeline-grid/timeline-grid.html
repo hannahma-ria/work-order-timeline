@@ -1,0 +1,64 @@
+<div class="grid-wrapper">
+  <!-- Left fixed panel -->
+  <div class="left-panel">
+    <div class="left-header">Work Center</div>
+    <div
+        class="work-center-row"
+        *ngFor="let wc of workCenters"
+        [class.active]="wc.docId === activeWorkCenterId">
+        {{ wc.data.name }}
+    </div>
+  </div>
+
+  <!-- Right scrollable panel -->
+  <div class="grid-scroll">
+    <div class="grid-inner" [style.width.px]="totalWidth">
+
+      <!-- Date headers -->
+      <div class="date-header-row">
+        <div
+            class="date-cell"
+            *ngFor="let col of columns"
+            [style.width.px]="columnWidth"
+            [class.today-col]="isToday(col)">
+            {{ formatColumnHeader(col) }}
+        </div>
+        <div class="today-label" [style.left.px]="todayOffset">
+        {{ zoom === 'hour' ? 'Now' : 'Today' }}
+        </div>
+      </div>
+
+      <!-- Work center rows -->
+      <div
+        class="grid-row"
+        *ngFor="let wc of workCenters"
+        [class.active]="wc.docId === activeWorkCenterId"
+        (click)="onRowClick($event, wc.docId)">
+
+        <!-- Column backgrounds -->
+        <div class="col-bg-row">
+          <div
+            class="col-bg"
+            *ngFor="let col of columns"
+            [style.width.px]="columnWidth"
+            [class.today-col]="isToday(col)">
+          </div>
+        </div>
+
+        <!-- Today indicator -->
+        <div class="today-line" [style.left.px]="todayOffset"></div>
+
+        <!-- Work order bars -->
+        <app-work-order-bar
+          *ngFor="let order of getOrdersForCenter(wc.docId)"
+          [order]="order"
+          [style.left.px]="getBarLeft(order.data.startDate)"
+          [style.width.px]="getBarWidth(order.data.startDate, order.data.endDate)"
+          (edit)="editOrder.emit($event)"
+          (delete)="deleteOrder.emit($event)">
+        </app-work-order-bar>
+      </div>
+
+    </div>
+  </div>
+</div>

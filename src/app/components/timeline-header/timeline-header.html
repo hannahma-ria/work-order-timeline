@@ -1,0 +1,22 @@
+<div class="header">
+  <img src="Group 3@10x.png" class="logo">
+  <h1 class="title">Work Orders</h1>
+  <div class="timescale-control">
+    <span class="timescale-label">Timescale</span>
+    <div class="timescale-dropdown" (click)="toggleDropdown()">
+      <span class="timescale-value">{{ currentLabel }}</span>
+      <svg class="timescale-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M2 4L6 8L10 4" stroke="grey" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+      <div class="timescale-menu" *ngIf="dropdownOpen">
+        <div 
+          *ngFor="let opt of zoomOptions"
+          class="timescale-option"
+          [class.active]="opt.value === zoom"
+          (click)="selectOption(opt.value)">
+          {{ opt.label }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,65 @@
+<div class="overlay" *ngIf="isOpen" (click)="onClose()"></div>
+
+<div class="panel" [class.open]="isOpen">
+  <div class="panel-header">
+    <div>
+      <h2>Work Order Details</h2>
+      <p>Specify the dates, name and status for this order</p>
+    </div>
+    <div class="panel-actions">
+      <button class="btn-cancel" (click)="onClose()">Cancel</button>
+      <button class="btn-save" (click)="onSave()">
+        {{ mode === 'create' ? 'Create' : 'Save' }}
+      </button>
+    </div>
+  </div>
+
+  <div class="panel-body" [formGroup]="form">
+
+    <div class="field">
+      <label>Work Order Name</label>
+      <input formControlName="name" placeholder="Acme Inc." />
+      <span class="error" *ngIf="form.get('name')?.invalid && form.get('name')?.touched">
+        Name is required
+      </span>
+    </div>
+
+    <div class="field">
+      <label>Status</label>
+      <ng-select
+        formControlName="status"
+        [items]="statusOptions"
+        bindLabel="label"
+        bindValue="value"
+        [clearable]="false">
+        <ng-template ng-label-tmp let-item="item">
+          <span class="status-badge" [ngClass]="item.value">{{ item.label }}</span>
+        </ng-template>
+        <ng-template ng-option-tmp let-item="item">
+          <span class="status-badge" [ngClass]="item.value">{{ item.label }}</span>
+        </ng-template>
+      </ng-select>
+    </div>
+
+    <div class="field">
+      <label>Start date</label>
+      <input formControlName="startDate" placeholder="DD.MM.YYYY" />
+      <span class="error" *ngIf="form.get('startDate')?.invalid && form.get('startDate')?.touched">
+        Start date is required
+      </span>
+    </div>
+
+    <div class="field">
+      <label>End date</label>
+      <input formControlName="endDate" placeholder="DD.MM.YYYY" />
+      <span class="error" *ngIf="form.get('endDate')?.invalid && form.get('endDate')?.touched">
+        End date is required
+      </span>
+    </div>
+
+    <div class="error overlap-error" *ngIf="overlapError">
+      ⚠ This order overlaps with an existing order or end date is before start date.
+    </div>
+
+  </div>
+</div>

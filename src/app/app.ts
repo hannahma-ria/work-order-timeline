@@ -1,12 +1,13 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component } from '@angular/core';
+import { Timeline } from './components/timeline/timeline';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
-  templateUrl: './app.html',
-  styleUrl: './app.scss'
+  standalone: true,
+  imports: [Timeline],
+  template: `<app-timeline></app-timeline>`,
+  styles: [`
+  :host { display: block; height: 100vh; }
+`]
 })
-export class App {
-  protected readonly title = signal('work-order-timeline');
-}
+export class App {}

@@ -1,1 +1,20 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'bootstrap/scss/bootstrap';
+@import '@ng-select/ng-select/themes/default.theme.css';
+
+* {
+  font-family: "Circular-Std", sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #f5f5f5;
+  color: #1a1a2e;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}

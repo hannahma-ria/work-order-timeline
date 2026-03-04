@@ -1,0 +1,147 @@
+.grid-wrapper {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  border: 1px solid #e8e8e8;
+  border-radius: 8px;
+  margin: 16px;
+  background: #fff;
+  min-height: 0;
+  height: 100%;
+}
+
+.left-panel {
+  width: 220px;
+  flex-shrink: 0;
+  border-right: 1px solid #e8e8e8;
+  z-index: 2;
+  background: #fff;
+  height: 100%;
+
+  .left-header {
+    height: 48px;
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #888;
+    border-bottom: 1px solid #e8e8e8;
+    background: #fafafa;
+  }
+
+  .work-center-row {
+    height: 48px;
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    font-size: 13px;
+    color: #1a1a2e;
+    border-bottom: 1px solid #f0f0f0;
+
+    &.active {
+        background: #f5f7ff;
+    }
+
+    &:hover {
+      background: #f5f7ff;
+    }
+  }
+}
+
+.grid-scroll {
+  flex: 1;
+  overflow-x: auto;
+  overflow-y: hidden;
+  position: relative;
+  height: 100%;
+}
+
+.grid-inner {
+  position: relative;
+}
+
+.date-header-row {
+  display: flex;
+  height: 48px;
+  border-bottom: 1px solid #e8e8e8;
+  background: #fafafa;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  position: relative;
+
+  .date-cell {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    color: #888;
+    border-right: 1px solid #f0f0f0;
+
+    &.today-col {
+      background: #f0f4ff;
+      color: #4a6cf7;
+      font-weight: 600;
+    }
+  }
+
+  .today-label {
+    position: absolute;
+    top: 85%;
+    transform: translate(-50%, -50%);
+    background: #4a6cf7;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 10px;
+    pointer-events: none;
+    white-space: nowrap;
+    z-index: 3;
+  }
+}
+
+.grid-row {
+  height: 48px;
+  position: relative;
+  border-bottom: 1px solid #f0f0f0;
+  cursor: pointer;
+
+  &.active {
+    .col-bg-row { background: #f5f7ff; }
+  }
+
+  &:hover {
+    .col-bg-row { background: #f9f9ff; }
+  }
+
+  .col-bg-row {
+    display: flex;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    .col-bg {
+      flex-shrink: 0;
+      border-right: 1px solid #f5f5f5;
+
+      &.today-col {
+        background: #f5f8ff;
+      }
+    }
+  }
+
+  .today-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #4a6cf7;
+    z-index: 2;
+    pointer-events: none;
+  }
+}

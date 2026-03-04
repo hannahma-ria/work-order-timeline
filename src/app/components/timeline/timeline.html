@@ -1,0 +1,27 @@
+<div class="timeline-container">
+  <app-timeline-header
+    [zoom]="zoom()"
+    (zoomChange)="onZoomChange($event)">
+  </app-timeline-header>
+
+  <app-timeline-grid
+    [zoom]="zoom()"
+    [workCenters]="workCenters"
+    [workOrders]="workOrders"
+    [activeWorkCenterId]="activeWorkCenterId()"
+    (timelineClick)="onTimelineClick($event)"
+    (editOrder)="onEdit($event)"
+    (deleteOrder)="onDelete($event)">
+    </app-timeline-grid>
+
+  <app-work-order-panel
+    [isOpen]="panelOpen()"
+    [mode]="panelMode()"
+    [order]="selectedOrder()"
+    [prefilledDate]="prefilledDate()"
+    [prefilledWorkCenterId]="prefilledWorkCenterId()"
+    [workCenters]="workCenters"
+    (save)="onPanelSave($event)"
+    (close)="onPanelClose()">
+    </app-work-order-panel>
+</div>

@@ -1,0 +1,15 @@
+.timeline-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: #fff;
+  position: relative;
+  overflow: hidden;
+
+  app-timeline-grid {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,12 @@
+<div class="bar" [style.background]="color">
+  <span class="bar-name">{{ order.data.name }}</span>
+  <span class="bar-status">{{ statusLabel }}</span>
+  <button class="menu-btn" (click)="toggleMenu($event)">⋯</button>
+
+  @if (menuOpen()) {
+    <div class="dropdown" (click)="$event.stopPropagation()">
+      <button (click)="onEdit($event)">Edit</button>
+      <button class="delete-btn" (click)="onDelete($event)">Delete</button>
+    </div>
+  }
+</div>
