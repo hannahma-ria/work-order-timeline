@@ -1,28 +1,32 @@
 import { Component, Input, Output, EventEmitter, HostBinding } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { WorkOrderDocument, WorkOrderStatus } from '../../models/work-order.models';
 
 @Component({
   selector: 'app-work-order-bar',
   standalone: true,
+  imports: [CommonModule],
   template: `
-    <div class="bar"
-      [style.background]="style.background"
-      [style.border]="style.border"
-      [class.menu-open]="isOpen">
-      <span class="bar-name" style="color: #030929">{{ order.data.name }}</span>
-      <span class="bar-status"
-        [style.color]="style.color"
-        [style.background]="style.badgeBg"
-        [style.border]="style.badgeBorder">
-        {{ statusLabel }}
-      </span>
-      <span class="menu-btn" (click)="toggleMenu($event)">⋯</span>
-      <div class="dropdown" [style.display]="isOpen ? 'block' : 'none'">
-        <button (click)="onEdit($event)">Edit</button>
-        <button class="delete-btn" (click)="onDelete($event)">Delete</button>
-      </div>
-    </div>
-  `,
+  <div class="bar"
+    [style.background]="style.background"
+    [style.border]="style.border"
+    [class.menu-open]="isOpen">
+
+    <span class="bar-name">{{ order.data.name }}</span>
+    <span class="bar-status"
+      [style.color]="style.color"
+      [style.background]="style.badgeBg"
+      [style.border]="style.badgeBorder">
+      {{ statusLabel }}
+    </span>
+    <span class="menu-btn" (click)="toggleMenu($event)">⋯</span>
+  </div>
+
+  <div class="dropdown" [style.display]="isOpen ? 'block' : 'none'">
+    <button (click)="onEdit($event)">Edit</button>
+    <button class="delete-btn" (click)="onDelete($event)">Delete</button>
+  </div>
+`,
   styleUrl: './work-order-bar.scss'
 })
 export class WorkOrderBar {

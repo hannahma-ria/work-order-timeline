@@ -33,9 +33,11 @@
         class="grid-row"
         *ngFor="let wc of workCenters"
         [class.active]="wc.docId === activeWorkCenterId"
-        (click)="onRowClick($event, wc.docId)">
+        (click)="onRowClick($event, wc.docId)"
+        (mousemove)="onRowMouseMove($event)"
+        (mouseenter)="hoveredRowId = wc.docId"
+        (mouseleave)="hoveredRowId = null">
 
-        <!-- Column backgrounds -->
         <div class="col-bg-row">
           <div
             class="col-bg"
@@ -45,10 +47,8 @@
           </div>
         </div>
 
-        <!-- Today indicator -->
         <div class="today-line" [style.left.px]="todayOffset"></div>
 
-        <!-- Work order bars -->
         <app-work-order-bar
           *ngFor="let order of getOrdersForCenter(wc.docId)"
           [order]="order"
@@ -57,6 +57,12 @@
           (edit)="editOrder.emit($event)"
           (delete)="deleteOrder.emit($event)">
         </app-work-order-bar>
+
+        <div class="add-tooltip"
+          *ngIf="hoveredRowId === wc.docId"
+          [style.left.px]="mouseX">
+          Click to add dates
+        </div>
       </div>
 
     </div>

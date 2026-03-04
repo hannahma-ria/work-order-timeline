@@ -39,6 +39,20 @@ export class TimelineGrid implements OnChanges {
     this.todayOffset = this.getDateOffset(new Date());
   }
 
+ hoveredRowId: string | null = null;
+mouseX = 0;
+
+onRowMouseMove(event: MouseEvent) {
+  const target = event.target as HTMLElement;
+  if (target.closest('app-work-order-bar')) {
+    this.hoveredRowId = null;
+    return;
+  }
+  const row = event.currentTarget as HTMLElement;
+  const rect = row.getBoundingClientRect();
+  this.mouseX = event.clientX - rect.left;
+}
+
   generateColumns() {
     const cols: Date[] = [];
     const today = new Date();
